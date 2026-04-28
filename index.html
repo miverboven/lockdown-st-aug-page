@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sint-Augustinus | Forensics Unit - SYSTEM COMPROMISED</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Roboto+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #002d62;
+            --gold: #d4af37;
+            --gold-light: #f1e5ac;
+            --white: #ffffff;
+            --danger: #e74c3c;
+            --bg-color: #f8f9fa;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-blue);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .hacked-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            border: 10px solid var(--danger);
+            opacity: 0.1;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 0.1;
+            }
+        }
+
+        header {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            border-bottom: 5px solid var(--gold);
+        }
+
+        .logo {
+            max-width: 150px;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+        }
+
+        .hacked-banner {
+            background: var(--danger);
+            color: white;
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 0.5rem;
+            letter-spacing: 5px;
+            font-family: 'Roboto Mono', monospace;
+            animation: glitch 1s infinite;
+        }
+
+        @keyframes glitch {
+            0% {
+                transform: translate(0);
+            }
+
+            20% {
+                transform: translate(-2px, 2px);
+            }
+
+            40% {
+                transform: translate(-2px, -2px);
+            }
+
+            60% {
+                transform: translate(2px, 2px);
+            }
+
+            80% {
+                transform: translate(2px, -2px);
+            }
+
+            100% {
+                transform: translate(0);
+            }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .intro-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-card::before {
+            content: "TOP SECRET";
+            position: absolute;
+            top: 20px;
+            right: -40px;
+            background: var(--gold);
+            color: var(--primary-blue);
+            padding: 5px 50px;
+            transform: rotate(45deg);
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--gold);
+            padding-left: 1rem;
+        }
+
+        .section-title h2 {
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .evidence-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .evidence-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .evidence-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .evidence-content {
+            padding: 1.5rem;
+        }
+
+        .btn-download {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 1rem;
+            transition: background 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn-download:hover {
+            background: var(--gold);
+            color: var(--primary-blue);
+        }
+
+        .toolkit-section {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 4rem 2rem;
+            border-radius: 30px;
+            margin-top: 4rem;
+        }
+
+        .toolkit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .tool-card h3 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .tool-card p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .btn-tool {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--primary-blue);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .btn-tool:hover {
+            background: var(--white);
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .hacked-stamp {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            font-size: 8rem;
+            font-weight: 900;
+            color: rgba(231, 76, 60, 0.2);
+            pointer-events: none;
+            z-index: 0;
+            border: 10px solid rgba(231, 76, 60, 0.2);
+            padding: 1rem 3rem;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .hacked-stamp {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hacked-overlay"></div>
+
+    <header>
+        <div class="hacked-banner">SYSTEM COMPROMISED - SECURITY BREACH DETECTED</div>
+        <img src="logo.png" alt="Sint-Augustinus Logo" class="logo">
+        <h1>Forensics Resource Portal</h1>
+    </header>
+
+    <div class="container">
+        <div class="intro-card">
+            <div class="hacked-stamp">HACKED</div>
+            <div class="section-title">
+                <h2>Incident Report: Card Access Breach</h2>
+            </div>
+            <p>
+                Attention Students of Basisschool Sint-Augstinus. Our school portal security has been bypassed.
+                The principal's AI-powered access mechanism, which uses visual recognition to scan staff ID cards, was
+                the primary target.
+            </p>
+            <p style="margin-top: 1rem; font-weight: 700;">
+                Your Task: Replicate the authentication mechanism and reconstruct the security protocols to help us
+                regain control. Do this by training a Teachable Machine model that can differentiate and recognize staff
+                and principal cards. For this you need to first generate more randomized cards, by using Google Gemini.
+                These cards can then be used to train the Teachable Machine model.
+            </p>
+            <p style="margin-top: 1rem; font-weight: 700;"></p>
+            If it works, show the lead lecturer
+            to gain access to the school portal and search <b>for the mailbox and phishing mail that got to the
+                principal</b>.
+            </p>
+        </div>
+
+        <div class="section-title">
+            <h2>Recovered Evidence</h2>
+        </div>
+        <p style="margin-bottom: 2rem;">These images were recovered from the hacker's temporary cache. Download them as
+            a base to train your model.</p>
+
+        <div class="evidence-grid">
+            <div class="evidence-card">
+                <img src="Gemini_Generated_Image_2tj9th2tj9th2tj9.png" alt="Evidence Card 1" class="evidence-img">
+                <div class="evidence-content">
+                    <h3>Staff Card</h3>
+                    <p>Sample recovered from the main server logs. Notice the blue and white thematic elements which
+                        make it a staff card.</p>
+                    <a href="Gemini_Generated_Image_2tj9th2tj9th2tj9.png" download class="btn-download">Download
+                        Evidence A</a>
+                </div>
+            </div>
+            <div class="evidence-card">
+                <img src="Gemini_Generated_Image_nczmmfnczmmfnczm.png" alt="Evidence Card 2" class="evidence-img">
+                <div class="evidence-content">
+                    <h3>Principal Card</h3>
+                    <p>A variant card used for administrative access by the principal during the breach window. Notice
+                        the black and gold theme.</p>
+                    <a href="Gemini_Generated_Image_nczmmfnczmmfnczm.png" download class="btn-download">Download
+                        Evidence B</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="toolkit-section">
+            <div class="section-title" style="border-color: var(--white);">
+                <h2 style="color: var(--white);">AI Toolkit</h2>
+            </div>
+            <p>Use these tools to reconstruct the portal's security layer.</p>
+
+            <div class="toolkit-grid">
+                <div class="tool-card">
+                    <h3>1. AI Recognition Model</h3>
+                    <p>Use Google Teachable Machine to replicate the AI image recognition used by the principal. Train
+                        it using the recovered evidence to see how the portal identifies legitimate cards. One class
+                        should be named "staff" and be based on staff cards and the other should be named "principal"
+                        and be based on the black and gold style cards of the principal.</p>
+                    <a href="https://teachablemachine.withgoogle.com/" target="_blank" class="btn-tool">Open Teachable
+                        Machine</a>
+                </div>
+                <div class="tool-card">
+                    <h3>2. Card Reconstruction</h3>
+                    <p>Access Google Gemini to generate randomized copies and variations of the cards. <strong>Note: You
+                            must log in with your Google account first.</strong></p>
+                    <p><em></em></p>
+                    <a href="https://gemini.google.com/" target="_blank" class="btn-tool">Open Google Gemini</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Basisschool Sint-Augstinus | Forensics Unit</p>
+        <p style="margin-top: 0.5rem; font-family: 'Roboto Mono', monospace; font-size: 0.7rem;">ENCRYPTION STATUS:
+            DISABLED | SYSTEM_LOG: 0x82FA93</p>
+    </footer>
+</body>
+
+</html>
