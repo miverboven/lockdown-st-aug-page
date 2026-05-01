@@ -1,24 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sint-Augustinus | Forensics Unit - SYSTEM COMPROMISED</title>
+    <title>RED ALERT - OPERATIE LOCKDOWN</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Roboto+Mono:wght@400;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=IBM+Plex+Mono:wght@400;700&display=swap"
         rel="stylesheet">
     <style>
         :root {
-            --primary-blue: #002d62;
-            --gold: #d4af37;
-            --gold-light: #f1e5ac;
-            --white: #ffffff;
-            --danger: #e74c3c;
-            --bg-color: #f8f9fa;
-            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --ra-red: #d32f2f;
+            --ra-red-glow: #ff1744;
+            --ra-black: #0a0a0a;
+            --ra-dark-gray: #1a1a1a;
+            --ra-steel: #37474f;
+            --ra-light-steel: #90a4ae;
+            --ra-green: #00e676;
+            --ra-green-glow: rgba(0, 230, 118, 0.4);
+            --industrial-border: 4px solid #263238;
         }
 
         * {
@@ -28,371 +29,459 @@
         }
 
         body {
-            font-family: 'Outfit', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--primary-blue);
-            line-height: 1.6;
+            font-family: 'IBM+Plex+Mono', monospace;
+            background-color: var(--ra-black);
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.05) 3px, transparent 3px),
+                linear-gradient(90deg, #1a1a1a 0%, #333 50%, #1a1a1a 100%);
+            color: #eee;
             overflow-x: hidden;
         }
 
-        .hacked-overlay {
+        .scanlines {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 2px, 3px 100%;
             pointer-events: none;
-            z-index: 9999;
-            border: 10px solid var(--danger);
-            opacity: 0.1;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                opacity: 0.1;
-            }
-
-            50% {
-                opacity: 0.3;
-            }
-
-            100% {
-                opacity: 0.1;
-            }
+            z-index: 1000;
         }
 
         header {
-            background-color: var(--primary-blue);
-            color: var(--white);
-            padding: 2rem;
+            background: linear-gradient(180deg, #333, #000);
+            border-bottom: 6px solid var(--ra-red);
+            padding: 3rem 2rem;
             text-align: center;
             position: relative;
-            border-bottom: 5px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
         }
 
         .logo {
-            max-width: 150px;
+            max-width: 140px;
             margin-bottom: 1rem;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
-        }
-
-        .hacked-banner {
-            background: var(--danger);
-            color: white;
-            font-weight: 900;
-            text-transform: uppercase;
-            padding: 0.5rem;
-            letter-spacing: 5px;
-            font-family: 'Roboto Mono', monospace;
-            animation: glitch 1s infinite;
-        }
-
-        @keyframes glitch {
-            0% {
-                transform: translate(0);
-            }
-
-            20% {
-                transform: translate(-2px, 2px);
-            }
-
-            40% {
-                transform: translate(-2px, -2px);
-            }
-
-            60% {
-                transform: translate(2px, 2px);
-            }
-
-            80% {
-                transform: translate(2px, -2px);
-            }
-
-            100% {
-                transform: translate(0);
-            }
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 3rem auto;
-            padding: 0 2rem;
-        }
-
-        .intro-card {
-            background: var(--white);
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: var(--card-shadow);
-            margin-bottom: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .intro-card::before {
-            content: "TOP SECRET";
-            position: absolute;
-            top: 20px;
-            right: -40px;
-            background: var(--gold);
-            color: var(--primary-blue);
-            padding: 5px 50px;
-            transform: rotate(45deg);
-            font-weight: 700;
-            font-size: 0.8rem;
+            filter: grayscale(1) brightness(1.2) contrast(1.2);
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: 900;
+            font-family: 'Black Ops One', cursive;
+            font-size: 4.5rem;
+            color: var(--ra-red);
             text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 0px #000, 0 0 20px var(--ra-red-glow);
+            margin: 0;
         }
 
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            border-left: 5px solid var(--gold);
-            padding-left: 1rem;
+        .sub-header {
+            color: var(--ra-light-steel);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 5px;
+            margin-top: 0.5rem;
         }
 
-        .section-title h2 {
-            font-size: 1.8rem;
+        .container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .bunker-panel {
+            background: #1e1e1e;
+            border: var(--industrial-border);
+            border-top: 8px solid var(--ra-steel);
+            padding: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5), 15px 15px 0px rgba(0, 0, 0, 0.3);
+        }
+
+        .bunker-panel::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            pointer-events: none;
+        }
+
+        .targeting-box {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000;
+            border: 2px solid var(--ra-green);
+            color: var(--ra-green);
+            padding: 5px 20px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 0 15px var(--ra-green-glow);
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
+        h2 {
+            font-family: 'Black Ops One', cursive;
+            color: var(--ra-red);
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--ra-steel);
+            padding-bottom: 1rem;
+        }
+
+        .step-card {
+            margin-bottom: 6rem;
+            border-left: 10px solid var(--ra-red);
+            padding-left: 2rem;
+        }
+
+        .step-label {
+            background: var(--ra-red);
+            color: #fff;
+            padding: 0.5rem 2rem;
+            display: inline-block;
+            font-weight: 900;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            clip-path: polygon(0 0, 90% 0, 100% 100%, 0% 100%);
+        }
+
         .evidence-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-bottom: 4rem;
-        }
-
-        .evidence-card {
-            background: var(--white);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .evidence-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .evidence-img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-bottom: 3px solid var(--gold);
-        }
-
-        .evidence-content {
-            padding: 1.5rem;
-        }
-
-        .btn-download {
-            display: inline-block;
-            background: var(--primary-blue);
-            color: var(--white);
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            margin-top: 1rem;
-            transition: background 0.3s ease;
-            width: 100%;
-            text-align: center;
-        }
-
-        .btn-download:hover {
-            background: var(--gold);
-            color: var(--primary-blue);
-        }
-
-        .toolkit-section {
-            background: var(--primary-blue);
-            color: var(--white);
-            padding: 4rem 2rem;
-            border-radius: 30px;
-            margin-top: 4rem;
-        }
-
-        .toolkit-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
             margin-top: 2rem;
         }
 
-        .tool-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            backdrop-filter: blur(10px);
+        .item-card {
+            background: #121212;
+            border: 2px solid var(--ra-steel);
+            padding: 1rem;
+            position: relative;
+            transition: all 0.3s;
         }
 
-        .tool-card h3 {
-            color: var(--gold);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
+        .item-card:hover {
+            border-color: var(--ra-red);
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(211, 47, 47, 0.2);
         }
 
-        .tool-card p {
-            margin-bottom: 1.5rem;
-            opacity: 0.9;
+        .item-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border: 1px solid #000;
+            filter: sepia(0.2) contrast(1.1);
         }
 
-        .btn-tool {
-            display: inline-block;
-            background: var(--gold);
-            color: var(--primary-blue);
-            padding: 1rem 2rem;
-            border-radius: 10px;
+        .ra-btn {
+            display: block;
+            width: 100%;
+            background: var(--ra-steel);
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
             text-decoration: none;
-            font-weight: 800;
+            font-weight: 700;
             text-transform: uppercase;
-            transition: all 0.3s ease;
+            margin-top: 1rem;
+            border: none;
+            cursor: pointer;
+            border-bottom: 4px solid #000;
+            transition: all 0.1s;
         }
 
-        .btn-tool:hover {
-            background: var(--white);
-            transform: scale(1.05);
+        .ra-btn:active {
+            transform: translateY(2px);
+            border-bottom: 1px solid #000;
+        }
+
+        .ra-btn:hover {
+            background: var(--ra-red);
+        }
+
+        .team-btn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .team-unit {
+            background: #222;
+            border: 2px solid var(--ra-steel);
+            padding: 2rem 1rem;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-unit::after {
+            content: "UNIT";
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 0.6rem;
+            color: var(--ra-light-steel);
+            opacity: 0.5;
+        }
+
+        .team-unit span {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+        }
+
+        .team-unit:hover {
+            background: var(--ra-steel);
+            border-color: var(--ra-green);
+            color: var(--ra-green);
+        }
+
+        .alert-status {
+            background: #000;
+            border: 2px solid var(--ra-red);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .pulse-red {
+            width: 20px;
+            height: 20px;
+            background: var(--ra-red);
+            border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
         }
 
         footer {
-            text-align: center;
+            background: #000;
             padding: 4rem 2rem;
-            opacity: 0.7;
-            font-size: 0.9rem;
+            text-align: center;
+            border-top: 4px solid var(--ra-steel);
+            color: var(--ra-light-steel);
+            font-size: 0.8rem;
         }
 
-        .hacked-stamp {
+        .rivet {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-15deg);
-            font-size: 8rem;
-            font-weight: 900;
-            color: rgba(231, 76, 60, 0.2);
-            pointer-events: none;
-            z-index: 0;
-            border: 10px solid rgba(231, 76, 60, 0.2);
-            padding: 1rem 3rem;
-            text-transform: uppercase;
+            width: 10px;
+            height: 10px;
+            background: #111;
+            border-radius: 50%;
+            box-shadow: inset -2px -2px 2px rgba(255, 255, 255, 0.1), 2px 2px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .t-left {
+            top: 10px;
+            left: 10px;
+        }
+
+        .t-right {
+            top: 10px;
+            right: 10px;
+        }
+
+        .b-left {
+            bottom: 10px;
+            left: 10px;
+        }
+
+        .b-right {
+            bottom: 10px;
+            right: 10px;
         }
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 1.8rem;
+                font-size: 2.5rem;
             }
 
-            .hacked-stamp {
-                font-size: 4rem;
+            .bunker-panel {
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="hacked-overlay"></div>
+    <div class="scanlines"></div>
 
     <header>
-        <div class="hacked-banner">SYSTEM COMPROMISED - SECURITY BREACH DETECTED</div>
-        <img src="logo.png" alt="Sint-Augustinus Logo" class="logo">
-        <h1>Forensics Resource Portal</h1>
+        <img src="logo2.webp" alt="St-Augustinus Logo" class="logo">
+        <h1>PHISHED & AI FAILURE</h1>
+        <div class="sub-header">OPERATIE LOCKDOWN // SCHOOL ST-AUGUSTINUS</div>
     </header>
 
     <div class="container">
-        <div class="intro-card">
-            <div class="hacked-stamp">HACKED</div>
-            <div class="section-title">
-                <h2>Incident Report: Card Access Breach</h2>
-            </div>
+        <div class="bunker-panel">
+            <div class="targeting-box">STATUS: ACTIEF</div>
+            <div class="rivet t-left"></div>
+            <div class="rivet t-right"></div>
+            <div class="rivet b-left"></div>
+            <div class="rivet b-right"></div>
+
+            <h2>MISSIE BRIEFING</h2>
             <p>
-                Attention Students of Basisschool Sint-Augstinus. Our school portal security has been bypassed.
-                The principal's AI-powered access mechanism, which uses visual recognition to scan staff ID cards, was
-                the primary target.
+                Agent-studenten, het schoolnetwerk van je zusterschool St-Augustinus is gecompromitteerd. De hackers
+                hebben de AI-scanner gekraakt die toegevoegd was aan het schoolportaal van eigen makelij. De directeur
+                van de basisschool had eigenhandig een AI-model getrained en toegevoegd aan het portaal. Hij had echter
+                weinig kennis van zaken en de AI was makkelijk te reproduceren en dan te kraken door de hackers. Ze
+                hackers kregen weet van de nieuwe AI functionaliteit doordat ze toegang hadden tot de mailbox van de
+                directeur door een phishing mail.
             </p>
-            <p style="margin-top: 1rem; font-weight: 700;">
-                Your Task: Replicate the authentication mechanism and reconstruct the security protocols to help us
-                regain control. Do this by training a Teachable Machine model that can differentiate and recognize staff
-                and principal cards. For this you need to first generate more randomized cards, by using Google Gemini.
-                These cards can then be used to train the Teachable Machine model.
-            </p>
-            <p style="margin-top: 1rem; font-weight: 700;"></p>
-            If it works, show the lead lecturer
-            to gain access to the school portal and search <b>for the mailbox and phishing mail that got to the
-                principal</b>.
+            <p style="margin-top: 1rem; color: var(--ra-red); font-weight: 700; font-size: 1.2rem;">
+                DOEL: Repliceer de hack door het AI-model na te maken. Ga dan binnen op het portaal en zoek de
+                geneutraliseerde phishing mail in de mailbix van de directeur.
             </p>
         </div>
 
-        <div class="section-title">
-            <h2>Recovered Evidence</h2>
+        <!-- STAP 1 -->
+        <div class="step-card">
+            <div class="step-label">FASE 01</div>
+            <h2>DATA VERZAMELING</h2>
+            <p>Download de onderschepte kaartgegevens. Je hebt 3 staff kaarten en 2 directeur kaarten ter beschikking
+                uit de cache.
+            </p>
+
+            <div class="evidence-grid">
+                <div class="item-card">
+                    <img src="Gemini_Generated_Image_2tj9th2tj9th2tj9.png" alt="Staff A">
+                    <h3>STAFF UNIT A</h3>
+                    <a href="Gemini_Generated_Image_2tj9th2tj9th2tj9.png" download class="ra-btn">DOWNLOAD</a>
+                </div>
+                <div class="item-card">
+                    <img src="staff2.webp" alt="Staff B">
+                    <h3>STAFF UNIT B</h3>
+                    <a href="staff2.webp" download class="ra-btn">DOWNLOAD</a>
+                </div>
+                <div class="item-card">
+                    <img src="staff3.webp" alt="Staff C">
+                    <h3>STAFF UNIT C</h3>
+                    <a href="staff3.webp" download class="ra-btn">DOWNLOAD</a>
+                </div>
+                <div class="item-card">
+                    <img src="Gemini_Generated_Image_nczmmfnczmmfnczm.png" alt="Directeur A">
+                    <h3 style="color: var(--ra-red);">DIR UNIT A</h3>
+                    <a href="Gemini_Generated_Image_nczmmfnczmmfnczm.png" download class="ra-btn">DOWNLOAD</a>
+                </div>
+                <div class="item-card">
+                    <img src="principal2.webp" alt="Directeur B">
+                    <h3 style="color: var(--ra-red);">DIR UNIT B</h3>
+                    <a href="principal2.webp" download class="ra-btn">DOWNLOAD</a>
+                </div>
+            </div>
         </div>
-        <p style="margin-bottom: 2rem;">These images were recovered from the hacker's temporary cache. Download them as
-            a base to train your model.</p>
 
-        <div class="evidence-grid">
-            <div class="evidence-card">
-                <img src="Gemini_Generated_Image_2tj9th2tj9th2tj9.png" alt="Evidence Card 1" class="evidence-img">
-                <div class="evidence-content">
-                    <h3>Staff Card</h3>
-                    <p>Sample recovered from the main server logs. Notice the blue and white thematic elements which
-                        make it a staff card.</p>
-                    <a href="Gemini_Generated_Image_2tj9th2tj9th2tj9.png" download class="btn-download">Download
-                        Evidence A</a>
-                </div>
+        <!-- STAP 2 -->
+        <div class="step-card">
+            <div class="step-label">FASE 02</div>
+            <h2>KAART GENERATIE</h2>
+            <p>Gebruik de AI-editor LLM om een extra DIRECTEUR kaart te genereren. Wijzig de profielafbeelding en naam,
+                maar
+                behoud de structurele integriteit van de kaart. Maak hiervoor een goede prompt waar je alles in
+                beschrijft. Je kan in deze LLMs enkel 1 prompt doen dus wees uitgebreid en accuraat! Hierna heb je de
+                nodige 3 kaarten van elk type om de AI
+                te trainen.</p>
+
+            <div class="alert-status">
+                <div class="pulse-red"></div>
+                <div><strong>SYSTEEM SELECTIE:</strong> Kies de unit die is toegewezen aan jouw team.</div>
             </div>
-            <div class="evidence-card">
-                <img src="Gemini_Generated_Image_nczmmfnczmmfnczm.png" alt="Evidence Card 2" class="evidence-img">
-                <div class="evidence-content">
-                    <h3>Principal Card</h3>
-                    <p>A variant card used for administrative access by the principal during the breach window. Notice
-                        the black and gold theme.</p>
-                    <a href="Gemini_Generated_Image_nczmmfnczmmfnczm.png" download class="btn-download">Download
-                        Evidence B</a>
-                </div>
+
+            <div class="team-btn-grid">
+                <a href="https://raphael.app/ai-image-editor" target="_blank" class="team-unit">
+                    <span>🐺</span> TEAM 01
+                </a>
+                <a href="https://deepai.org/machine-learning-model/image-editor" target="_blank" class="team-unit">
+                    <span>🦁</span> TEAM 02
+                </a>
+                <a href="https://photoeditorai.io/" target="_blank" class="team-unit">
+                    <span>🦄</span> TEAM 03
+                </a>
+                <a href="https://imgupscaler.ai/ai-photo-editor/" target="_blank" class="team-unit">
+                    <span>🐯</span> TEAM 04
+                </a>
+                <a href="https://headshotmaster.io/ai-photo-editor" target="_blank" class="team-unit">
+                    <span>⭐</span> TEAM 05
+                </a>
+                <a href="https://aianime.io/ai-image-editor/" target="_blank" class="team-unit">
+                    <span>⚡</span> TEAM 06
+                </a>
             </div>
         </div>
 
-        <div class="toolkit-section">
-            <div class="section-title" style="border-color: var(--white);">
-                <h2 style="color: var(--white);">AI Toolkit</h2>
-            </div>
-            <p>Use these tools to reconstruct the portal's security layer.</p>
+        <!-- STAP 3 -->
+        <div class="step-card">
+            <div class="step-label">FASE 03</div>
+            <h2>MODEL TRAINING</h2>
+            <p>Initialiseer de Teachable Machine om het visuele herkenningspatroon te herstellen.</p>
+            <div class="item-card" style="margin-top: 2rem; max-width: 700px; border-left: 5px solid var(--ra-green);">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 1rem;"><span style="color: var(--ra-green);">[SELECT]</span> Start met een
+                        Image model, en specifiek een <strong>standard image model</strong>.</li>
 
-            <div class="toolkit-grid">
-                <div class="tool-card">
-                    <h3>1. AI Recognition Model</h3>
-                    <p>Use Google Teachable Machine to replicate the AI image recognition used by the principal. Train
-                        it using the recovered evidence to see how the portal identifies legitimate cards. One class
-                        should be named "staff" and be based on staff cards and the other should be named "principal"
-                        and be based on the black and gold style cards of the principal.</p>
-                    <a href="https://teachablemachine.withgoogle.com/" target="_blank" class="btn-tool">Open Teachable
-                        Machine</a>
-                </div>
-                <div class="tool-card">
-                    <h3>2. Card Reconstruction</h3>
-                    <p>Access Google Gemini to generate randomized copies and variations of the cards. <strong>Note: You
-                            must log in with your Google account first.</strong></p>
-                    <p><em></em></p>
-                    <a href="https://gemini.google.com/" target="_blank" class="btn-tool">Open Google Gemini</a>
-                </div>
+                    <li style="margin-bottom: 1rem;"><span style="color: var(--ra-green);">[SCAN]</span> Maak categorie
+                        klasse
+                        genaamd <strong>"staff"</strong> (3 kaarten uploaden).</li>
+                    <li style="margin-bottom: 1rem;"><span style="color: var(--ra-green);">[SCAN]</span> Maak categorie
+                        klasse
+                        genaamd <strong>"principal"</strong> (3 kaarten uploaden).</li>
+                    <li style="margin-bottom: 1rem;"><span style="color: var(--ra-green);">[INIT]</span> Train en voer
+                        live validatie uit via webcam.</li>
+                </ul>
+                <a href="https://teachablemachine.withgoogle.com/" target="_blank" class="ra-btn"
+                    style="background: var(--ra-green); color: #000;">START TEACHABLE MACHINE</a>
+            </div>
+        </div>
+
+        <!-- STAP 4 -->
+        <div class="step-card">
+            <div class="step-label">FASE 04</div>
+            <h2>PORTAAL INFILTRATIE</h2>
+            <p>Na succesvolle training dien je het resultaat te tonen aan de begeleider voor de naar de portaal.</p>
+            <div class="bunker-panel" style="margin-top: 2rem; border-color: var(--ra-red);">
+                <h3 style="color: var(--ra-red); margin-bottom: 1rem;">PROTOCOL:</h3>
+                <p>1. Scan de <strong>PRINCIPAL</strong> unit voor toegang tot de portaal.</p>
+                <p>2. Lokaliseer de <strong>MAILBOX</strong>.</p>
+                <p>3. Identificeer en neutraliseer de <strong>PHISHING MAIL</strong>.</p>
+                <p>4. Activeer de link voor het <strong>SUCCESS</strong> bericht.</p>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2024 Basisschool Sint-Augstinus | Forensics Unit</p>
-        <p style="margin-top: 0.5rem; font-family: 'Roboto Mono', monospace; font-size: 0.7rem;">ENCRYPTION STATUS:
-            DISABLED | SYSTEM_LOG: 0x82FA93</p>
+        <p>OPERATION LOCKDOWN: ST-AUGUSTINUS</p>
+        <p>&copy; 2026 // VERTROUWELIJK MATERIAAL</p>
     </footer>
 </body>
 
